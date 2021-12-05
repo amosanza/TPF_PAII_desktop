@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 31 oct. 2021 21:16:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modeloDatosTPF.Suelo" table="suelo" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <property name="lagunas" type="java.lang.Boolean">
+            <column name="lagunas" />
+        </property>
+        <property name="piedras" type="java.lang.Boolean">
+            <column name="piedras" />
+        </property>
+        <property name="humedad" type="java.lang.Float">
+            <column name="humedad" precision="8" scale="8" />
+        </property>
+        <set name="lotes" table="lote" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fksuelo" not-null="true" />
+            </key>
+            <one-to-many class="modeloDatosTPF.Lote" />
+        </set>
+        <set name="cultivos" table="cultivo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fksuelo" not-null="true" />
+            </key>
+            <one-to-many class="modeloDatosTPF.Cultivo" />
+        </set>
+        <set name="porcentajes" table="porcentaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fksuelo" not-null="true" />
+            </key>
+            <one-to-many class="modeloDatosTPF.Porcentaje" />
+        </set>
+    </class>
+</hibernate-mapping>
